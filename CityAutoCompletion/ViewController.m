@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 #import "AFNetworking.h"
-NSString * const kCountry = @"USA"; // const pointer
-
+NSString * const kCountry = @"USA";
+#warning Insert your Google API key and enable place services, then delete me
+NSString * const kGoogleAPIKey = @"USE-YOUR-KEY-HERE";
 @interface ViewController (){
     NSArray *results;
 }
@@ -29,7 +30,7 @@ NSString * const kCountry = @"USA"; // const pointer
 
 - (IBAction)updateRequest:(UITextField *)sender {
     NSString *requestStr;
-    requestStr = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@,%@&types=(cities)&language=es_CO&key=AIzaSyC6h7PE8hXRVB5IMkT-AkeAGQb-HZfA1-I",kCountry,sender.text];
+    requestStr = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@,%@&types=(cities)&language=es_CO&key=%@",kCountry,sender.text, kGoogleAPIKey];
     requestStr = [requestStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:requestStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
